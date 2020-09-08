@@ -61,12 +61,14 @@ export const AuthProvider: React.FC = ({ children }) => {
 
 
     const signIn = useCallback( async ({ email, password}) => {
+        console.log('signin');
         
         const response = await api.post('sessions', {
             email,
             password,
         })
 
+        console.log(response);
         const { token, user } = response.data;
 
         await AsyncStorage.multiSet([['@GoBarber:token', token], ['@GoBarber:user', JSON.stringify(user)]]);

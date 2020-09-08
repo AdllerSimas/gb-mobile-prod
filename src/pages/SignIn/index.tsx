@@ -42,21 +42,23 @@ const SignIn: React.FC = () => {
                 email: Yup.string().required('E-mail Obrigatório!').email('Digite um email válido!'),
                 password: Yup.string().min(6, 'Senha Obrigatória!'),
             });
-
+            console.log('1');
             await schema.validate(data, {
                 abortEarly: false,
             });
 
+            console.log('2');
             await signIn({
                 email: data.email,
                 password: data.password,
             });
+            console.log('3');
 
         } catch (err) {
             
             if (err instanceof Yup.ValidationError) {
                 const errors = getValidationErrors(err);
-
+                console.log(err);
                 formRef.current?.setErrors(errors);
 
                 return;
